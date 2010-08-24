@@ -33,6 +33,8 @@ class Recipe(object):
 
         self._unzip('web2py_src.zip','.')
 
+        call('rm -rf web2py_src.zip', shell=True)
+
         files = listdir(apps_dir)
 
         self._install_apps(files)
@@ -45,6 +47,7 @@ class Recipe(object):
         # Return files that were created by the recipe. The buildout
         # will remove all returned files upon reinstall.
         return tuple()
+    update = install
 
     def _unzip(self, archive, destination):
         zip_file = ZipFile(archive)
@@ -75,31 +78,31 @@ class Recipe(object):
         self._make_executable(join('bin','web2py'))
 
     def _web2py_script_template(self, pid_file, password):
-        script = "#!/bin/bash\r\n" + \
-                 "PYTHON=python\r\n" + \
-                 "\r\n" + \
-                 "start() {\r\n" + \
-                 "  ${PYTHON} %s -a %s -d %s\r\n" % (join('web2py','web2py.py'), \
+        script = "#!/bin/bash\n" + \
+                 "PYTHON=python\n" + \
+                 "\n" + \
+                 "start() {\n" + \
+                 "  ${PYTHON} %s -a %s -d %s\n" % (join('web2py','web2py.py'), \
                                          password, \
                                          pid_file) + \
-                 "}\r\n" + \
-                 "\r\n" + \
-                 "stop() {\r\n" + \
-                 "  kill `cat %s`\r\n" % join('web2py', pid_file) + \
-                 "}\r\n" + \
-                 "\r\n" + \
-                 'case "$1" in\r\n' + \
-                 "  start)\r\n" + \
-                 "    start;;\r\n" + \
-                 "  stop)\r\n" + \
-                 "    stop;;\r\n" + \
-                 "  restart)\r\n" + \
-                 "    start\r\n" + \
-                 "    stop;;\r\n" + \
-                 "  *)\r\n" + \
-                 '  echo "Usage: web2py {start|stop|restart}"\r\n' + \
-                 "  exit 1;;\r\n" + \
-                 "esac\r\n" + \
+                 "}\n" + \
+                 "\n" + \
+                 "stop() {\n" + \
+                 "  kill `cat %s`\n" % join('web2py', pid_file) + \
+                 "}\n" + \
+                 "\n" + \
+                 'case "$1" in\n' + \
+                 "  start)\n" + \
+                 "    start;;\n" + \
+                 "  stop)\n" + \
+                 "    stop;;\n" + \
+                 "  restart)\n" + \
+                 "    start\n" + \
+                 "    stop;;\n" + \
+                 "  *)\n" + \
+                 '  echo "Usage: web2py {start|stop|restart}"\n' + \
+                 "  exit 1;;\n" + \
+                 "esac\n" + \
                  "exit"
 
         open(join('bin','web2py'),'w+').write(script)
@@ -107,7 +110,7 @@ class Recipe(object):
     def _make_executable(self, file_):
         chmod(file_, 0777)
 
-    def update(self):
-        """Updater"""
-        pass
+#    def update(self):
+#        """Updater"""
+#        pass
 
