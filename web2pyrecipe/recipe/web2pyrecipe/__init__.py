@@ -10,7 +10,8 @@ from tarfile import TarFile
 
 """
 A recipe for installing the lastest web2py framework version and all the apps in
-the 'appdir' options. It defines the 'default' option as the default web2py's
+the 'appdir' options. It defines the 'default' optd ..
+ion as the default web2py's
 app.
 """
 
@@ -25,7 +26,7 @@ class Recipe(object):
     def install(self):
         """Installer"""
         apps_dir = self.options.get('appdir')
-        default_app = self.options.get('default') or 'welcome'
+        default_app = self.options.get('default').replace('.','_') or 'welcome'
         password = self.options.get('password') or 'web2py'
         pid_file = self.options.get('pidfile') or 'pid.txt'
 
@@ -56,7 +57,7 @@ class Recipe(object):
     def _install_apps(self, file_list):
         for file_ in file_list:
             filename = join(self.options.get('appdir'), file_)
-            new_dir = file_[:-4]
+            new_dir = file_[:-4].replace('.','_')
             mkdir(join('web2py','applications', new_dir))
             dest = join('web2py', 'applications', new_dir)
             self._untar(filename, dest)
@@ -67,9 +68,9 @@ class Recipe(object):
 
     def _set_default_app(self, default_app):
         routes = open(join('web2py','routes.py'),'w+')
-        routes.write("default_application = '%s'\r\n" % default_app + \
-                     "default_controller = 'default'\r\n" + \
-                     "default_function = 'index'\r\n"
+        routes.write("default_application = '%s'\n" % default_app + \
+                     "default_controller = 'default'\n" + \
+                     "default_function = 'index'\n"
                      )
         routes.close()
 
