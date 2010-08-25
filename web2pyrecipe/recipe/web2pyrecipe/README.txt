@@ -53,7 +53,6 @@ Checking the root directory structure::
      d  eggs
      d  parts
      d  web2py
-     -  web2py_src.zip
      d  web2pyapps
 
 Checking the test app for w2p::
