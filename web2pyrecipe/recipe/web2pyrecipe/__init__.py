@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from subprocess import call
-from os import listdir, mkdir, fchmod, chmod
+from os import listdir, mkdir, fchmod, chmod, listdir, rmdir
 from os.path import join, abspath, dirname
 from stat import S_IRWXO, S_IRWXU
 from shutil import copy
@@ -26,7 +26,10 @@ class Recipe(object):
     def install(self):
         """Installer"""
         apps_dir = self.options.get('appdir')
-        default_app = self.options.get('default').replace('.','_') or 'welcome'
+        default_app = self.options.get('default')
+        if not default_app:
+            default_app = 'welcome'
+        default_app = default_app.replace('.','_')
         password = self.options.get('password') or 'web2py'
         pid_file = self.options.get('pidfile') or 'pid.txt'
 
@@ -58,6 +61,8 @@ class Recipe(object):
         for file_ in file_list:
             filename = join(self.options.get('appdir'), file_)
             new_dir = file_[:-4].replace('.','_')
+            if new_dir in listdir('.'):
+                rmdir(new_dir)
             mkdir(join('web2py','applications', new_dir))
             dest = join('web2py', 'applications', new_dir)
             self._untar(filename, dest)
@@ -83,7 +88,7 @@ class Recipe(object):
                  "PYTHON=python\n" + \
                  "\n" + \
                  "start() {\n" + \
-                 "  ${PYTHON} %s -a %s -d %s\n" % (join('web2py','web2py.py'), \
+                 "  ${PYTHON} %s -a %s -d %s &\n" % (join('web2py','web2py.py'), \
                                          password, \
                                          pid_file) + \
                  "}\n" + \
