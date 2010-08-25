@@ -1,1 +1,9 @@
 *.pyc
+.installed.cfg
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+web2pyrecipe.egg-info/
+
