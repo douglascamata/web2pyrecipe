@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from subprocess import call
-from os import listdir, mkdir, fchmod, chmod, listdir, rmdir
+from os import listdir, mkdir, fchmod, chmod, listdir, removedirs
 from os.path import join, abspath, dirname
 from stat import S_IRWXO, S_IRWXU
 from shutil import copy
@@ -62,7 +62,7 @@ class Recipe(object):
             filename = join(self.options.get('appdir'), file_)
             new_dir = file_[:-4].replace('.','_')
             if new_dir in listdir(join('web2py','applications')):
-                rmdir(join('web2py','applications',new_dir))
+                removedirs(join('web2py','applications',new_dir))
             mkdir(join('web2py','applications', new_dir))
             dest = join('web2py', 'applications', new_dir)
             self._untar(filename, dest)
