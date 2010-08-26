@@ -50,7 +50,7 @@ class Recipe(object):
         # XXX Implement recipe functionality here
         # Return files that were created by the recipe. The buildout
         # will remove all returned files upon reinstall.
-        return tuple()
+        return ('webpy',)
     update = install
 
     def _unzip(self, archive, destination):
@@ -61,8 +61,8 @@ class Recipe(object):
         for file_ in file_list:
             filename = join(self.options.get('appdir'), file_)
             new_dir = file_[:-4].replace('.','_')
-            if new_dir in listdir('.'):
-                rmdir(new_dir)
+            if new_dir in listdir(join('web2py','applications')):
+                rmdir(join('web2py','applications',new_dir))
             mkdir(join('web2py','applications', new_dir))
             dest = join('web2py', 'applications', new_dir)
             self._untar(filename, dest)
