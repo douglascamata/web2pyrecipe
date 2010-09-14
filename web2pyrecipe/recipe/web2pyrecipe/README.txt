@@ -79,6 +79,7 @@ Checking if web2py is extracted correctly::
     -  fcgihandler.py
     -  gaehandler.py
     d  gluon
+    -  logging.example.conf
     -  modpythonhandler.py
     -  options_std.py
     -  queue.yaml
