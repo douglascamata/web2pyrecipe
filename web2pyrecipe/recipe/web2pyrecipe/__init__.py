@@ -64,9 +64,9 @@ class Recipe(object):
             if new_dir in listdir(join('web2py','applications')):
                 for root, dirs, files, in walk(join('web2py','applications',new_dir)):
                     for name in files:
-                        os.remove(join(root, name))
+                        remove(join(root, name))
                     for name in dirs:
-                        os.rmdir(join(root, name))
+                        rmdir(join(root, name))
             mkdir(join('web2py','applications', new_dir))
             dest = join('web2py', 'applications', new_dir)
             self._untar(filename, dest)
