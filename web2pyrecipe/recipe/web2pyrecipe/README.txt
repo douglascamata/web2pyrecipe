@@ -97,11 +97,11 @@ Checking if the test app is correctly extracted at web2py's application director
     -  __init__.py
     d  admin
     d  examples
-    d  web2py.app.chat
+    d  web2py_app_chat
     d  welcome
 
     >>> cat(join('web2py','routes.py'))
-    default_application = 'web2py.app.chat'
+    default_application = 'web2py_app_chat'
     default_controller = 'default'
     default_function = 'index'
 
