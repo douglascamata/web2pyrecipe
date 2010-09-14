@@ -94,6 +94,7 @@ Checking if web2py is extracted correctly::
 Checking if the test app is correctly extracted at web2py's application directory::
 
     >>> ls(join('web2py','applications'))
+    -  __init__.py
     d  admin
     d  examples
     d  web2py.app.chat
