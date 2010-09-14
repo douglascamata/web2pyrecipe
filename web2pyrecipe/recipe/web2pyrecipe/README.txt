@@ -118,7 +118,7 @@ So, let's check the content of 'web2py' script::
     PYTHON=python
     <BLANKLINE>
     start() {
-        ${PYTHON} web2py/web2py.py -a 123 -d pid.txt
+        ${PYTHON} web2py/web2py.py -a 123 -d pid.txt &
     }
     <BLANKLINE>
     stop() {
