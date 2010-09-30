@@ -2,7 +2,7 @@
 
 from subprocess import call
 from os import listdir, mkdir, fchmod, chmod, listdir, walk, remove, rmdir
-from shutils import rmtree
+from shutil import rmtree
 from os.path import join, abspath, dirname
 from stat import S_IRWXO, S_IRWXU
 from shutil import copy
