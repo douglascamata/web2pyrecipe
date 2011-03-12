@@ -42,6 +42,7 @@ Running the buildout gives us::
     Unused options for test1: 'option2'.
     <BLANKLINE>
     ...
+    <BLANKLINE>
 
 Checking the root directory structure::
 
@@ -70,6 +71,7 @@ Checking if web2py is extracted correctly::
     -  README
     -  VERSION
     -  __init__.py
+    -  anyserver.py
     -  app.yaml
     -  appengine_config.py
     d  applications
@@ -83,11 +85,14 @@ Checking if web2py is extracted correctly::
     -  modpythonhandler.py
     -  options_std.py
     -  queue.yaml
+    -  router.example.py
     -  routes.example.py
     -  routes.py
+    -  scgihandler.py
     d  scripts
     -  setup_app.py
     -  setup_exe.py
+    -  splashlogo.gif
     -  web2py.py
     -  wsgihandler.py
 
