@@ -34,9 +34,11 @@ class Recipe(object):
         password = self.options.get('password') or 'web2py'
         pid_file = self.options.get('pidfile') or 'pid.txt'
 
+        call('rm -rf web2py_src.zip', shell=True)
+
         call('wget http://www.web2py.com/examples/static/web2py_src.zip', shell=True)
 
-        self._unzip('web2py_src.zip','.')
+        self._unzip('web2py_src.zip')
 
         call('rm -rf web2py_src.zip', shell=True)
 
@@ -54,9 +56,8 @@ class Recipe(object):
         return ('webpy',)
     update = install
 
-    def _unzip(self, archive, destination):
-        zip_file = ZipFile(archive)
-        zip_file.extractall(path=destination)
+    def _unzip(self, archive):
+        call("unzip -qq %s" % archive, shell=True)
 
     def _install_apps(self, file_list):
         for file_ in file_list:
