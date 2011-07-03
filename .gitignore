@@ -6,4 +6,5 @@ develop-eggs/
 dist/
 eggs/
 web2pyrecipe.egg-info/
+parts/*
 
