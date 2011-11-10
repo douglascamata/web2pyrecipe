@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from subprocess import call
-from os import listdir, mkdir, fchmod, chmod, listdir, walk, remove, rmdir
-from shutil import rmtree
-from os.path import join, abspath, dirname
+from os import listdir, mkdir, chmod, walk, remove, rmdir, remove
+from os.path import join, abspath, dirname, exists
 from stat import S_IRWXO, S_IRWXU
-from shutil import copy
 from zipfile import ZipFile
 from tarfile import TarFile
 
 """
 A recipe for installing the lastest web2py framework version and all the apps in
-the 'appdir' options. It defines the 'default' optd ..
-ion as the default web2py's
-app.
+the 'appdir' options. It defines the 'default' option as the default web2py's app.
 """
 
 FOLDER = abspath(dirname(__file__))
@@ -27,20 +23,19 @@ class Recipe(object):
     def install(self):
         """Installer"""
         apps_dir = self.options.get('appdir')
-        default_app = self.options.get('default')
-        if not default_app:
-            default_app = 'welcome'
+        default_app = self.options.get('default') or 'welcome'
         default_app = default_app.replace('.','_')
         password = self.options.get('password') or 'web2py'
         pid_file = self.options.get('pidfile') or 'pid.txt'
 
-        call('rm -rf web2py_src.zip', shell=True)
+        if exists('web2py_src.zip'):
+            remove('web2py_src.zip')
 
         call('wget http://www.web2py.com/examples/static/web2py_src.zip', shell=True)
 
         self._unzip('web2py_src.zip')
 
-        call('rm -rf web2py_src.zip', shell=True)
+        remove('web2py_src.zip')
 
         files = listdir(apps_dir)
 
@@ -57,14 +52,16 @@ class Recipe(object):
     update = install
 
     def _unzip(self, archive):
-        call("unzip -qq %s" % archive, shell=True)
+        zip_file = ZipFile(archive, 'r')
+        zip_file.extractall()
+        #call("unzip -qq %s" % archive, shell=True)
 
     def _install_apps(self, file_list):
         for file_ in file_list:
             filename = join(self.options.get('appdir'), file_)
             new_dir = file_[:-4].replace('.','_')
             if new_dir in listdir(join('web2py','applications')):
-                rmtree(new_dir)
+                rmdir(new_dir)
             mkdir(join('web2py','applications', new_dir))
             dest = join('web2py', 'applications', new_dir)
             self._untar(filename, dest)
