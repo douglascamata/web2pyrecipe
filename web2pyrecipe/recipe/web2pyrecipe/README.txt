@@ -41,8 +41,6 @@ Running the buildout gives us::
     Installing test1.
     Unused options for test1: 'option2'.
     <BLANKLINE>
-    ...
-    <BLANKLINE>
 
 Checking the root directory structure::
 
