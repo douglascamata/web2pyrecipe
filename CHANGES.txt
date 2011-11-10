@@ -1,5 +1,11 @@
-1.0 (xxxx-xx-xx)
+1.0.1 (2011-11-10)
 ----------------
 
-- Created recipe with ZopeSkel
-  [""]
+- Lots of refactoring to a more pythonic and less
+  system-depedent code
+
+
+1.0.0 (2010-09-30)
+----------------
+
+- Initial release
