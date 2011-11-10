@@ -37,9 +37,7 @@ class Recipe(object):
 
         remove('web2py_src.zip')
 
-        files = listdir(apps_dir)
-
-        self._install_apps(files)
+        self._install_apps(apps_dir)
 
         self._set_default_app(default_app)
 
@@ -56,7 +54,8 @@ class Recipe(object):
         zip_file.extractall()
         #call("unzip -qq %s" % archive, shell=True)
 
-    def _install_apps(self, file_list):
+    def _install_apps(self, apps_dir):
+        file_list = listdir(apps_dir)
         for file_ in file_list:
             filename = join(self.options.get('appdir'), file_)
             new_dir = file_[:-4].replace('.','_')
