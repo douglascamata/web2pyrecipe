@@ -72,7 +72,7 @@ Checking if web2py is extracted correctly::
     -  VERSION
     -  __init__.py
     -  anyserver.py
-    -  app.yaml
+    -  app.example.yaml
     -  appengine_config.py
     d  applications
     -  cgihandler.py
@@ -81,17 +81,21 @@ Checking if web2py is extracted correctly::
     -  fcgihandler.py
     -  gaehandler.py
     d  gluon
+    -  isapiwsgihandler.py
     -  logging.example.conf
     -  modpythonhandler.py
     -  options_std.py
-    -  queue.yaml
+    -  queue.example.yaml
     -  router.example.py
     -  routes.example.py
     -  routes.py
     -  scgihandler.py
     d  scripts
+    -  setup.py
     -  setup_app.py
     -  setup_exe.py
+    -  setup_exe_2.6.py
+    d  site-packages
     -  splashlogo.gif
     -  web2py.py
     -  wsgihandler.py
