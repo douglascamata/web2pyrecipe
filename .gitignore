@@ -8,4 +8,4 @@ eggs/
 web2pyrecipe.egg-info/
 parts/*
 .DS_Store
-
+*.swp
