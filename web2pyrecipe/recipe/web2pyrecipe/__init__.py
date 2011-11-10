@@ -3,9 +3,9 @@
 from subprocess import call
 from os import listdir, mkdir, chmod, walk, remove, rmdir, remove
 from os.path import join, abspath, dirname, exists
-from stat import S_IRWXO, S_IRWXU
 from zipfile import ZipFile
 from tarfile import TarFile
+from urllib2 import urlopen
 
 """
 A recipe for installing the lastest web2py framework version and all the apps in
@@ -31,7 +31,7 @@ class Recipe(object):
         if exists('web2py_src.zip'):
             remove('web2py_src.zip')
 
-        call('wget http://www.web2py.com/examples/static/web2py_src.zip', shell=True)
+        self._download('http://www.web2py.com/examples/static/web2py_src.zip', 'web2py_src.zip')
 
         self._unzip('web2py_src.zip')
 
@@ -49,10 +49,15 @@ class Recipe(object):
         return ('webpy',)
     update = install
 
+    def _download(self, url, destination):
+        web_file = urlopen(url).read()
+        local_file = open(destination, 'wb')
+        local_file.write(web_file)
+        local_file.close()
+
     def _unzip(self, archive):
         zip_file = ZipFile(archive, 'r')
         zip_file.extractall()
-        #call("unzip -qq %s" % archive, shell=True)
 
     def _install_apps(self, apps_dir):
         file_list = listdir(apps_dir)
